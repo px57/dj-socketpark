@@ -1,4 +1,5 @@
 
+from kernel.commandline.print import print_title
 from kernel.websocket.config import find_consumers_files
 from django.urls import re_path
 
@@ -11,14 +12,7 @@ def convert_camelcase_to_snakecase(name: str):
 
 def yield__websocket_urlparttern():
     """
-        @description:
-        @return: 
-            [
-                re_path("ws/internal/", InternalConsumer.as_asgi()),
-                re_path("ws/playroom/$", PlayRoomConsumer.as_asgi()),
-                re_path("ws/chatroom/$", ChatRoomConsumer.as_asgi()),
-                re_path("ws/victory_talk/$", VictoryTalkConsumer.as_asgi()),
-            ] 
+        @description:  yield all websocket urlpartterns
     """
     pathname_list = {}
     consumers_file = find_consumers_files()
@@ -53,4 +47,13 @@ def create_websocket_urlparttern():
                 getattr(consumer_file.consumers, consumer).as_asgi()
             )
     )
+    show_url_partterns(urlpartterns)
     return urlpartterns
+
+def show_url_partterns(urlpartterns):
+    """
+        @description: show all urlpartterns
+    """
+    print_title("Websocket urlpartterns")
+    for urlparttern in urlpartterns:
+        print_title ((urlparttern))
