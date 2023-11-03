@@ -5,3 +5,5 @@ from .consumers import InternalConsumer
 from .libs import create_websocket_urlparttern
 
 websocket_urlpatterns = create_websocket_urlparttern()
+
+print (websocket_urlpatterns)
